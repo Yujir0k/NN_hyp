@@ -462,7 +462,7 @@ class SearchQuerySanitizer:
 class ModelGateway:
     def __init__(self) -> None:
         self.provider = os.getenv('NORLAB_LLM_PROVIDER', 'yandex').lower()
-        self.yandex_base_url = os.getenv('YANDEX_AI_BASE_URL', 'https://ai.api.cloud.yandex.net/v1').rstrip('/')
+        self.yandex_base_url = os.getenv('YANDEX_AI_BASE_URL', 'https://llm.api.cloud.yandex.net/v1').rstrip('/')
         self.openmodel_base_url = os.getenv('OPENMODEL_BASE_URL', 'https://api.openmodel.ai/v1').rstrip('/')
         self.gemini_base_url = os.getenv('GEMINI_BASE_URL', 'https://generativelanguage.googleapis.com/v1beta').rstrip('/')
         self.base_url = self.gemini_base_url if self.provider == 'gemini' else self.openmodel_base_url if self.provider == 'openmodel' else self.yandex_base_url
@@ -471,7 +471,7 @@ class ModelGateway:
         self.gemini_api_key = os.getenv('GEMINI_API_KEY', '')
         self.api_key = self.gemini_api_key if self.provider == 'gemini' else self.openmodel_api_key if self.provider == 'openmodel' else self.yandex_api_key
         self.folder_id = os.getenv('YANDEX_FOLDER_ID', '')
-        self.generator_model = os.getenv('NORLAB_GENERATOR_MODEL', 'deepseek-v4-flash')
+        self.generator_model = os.getenv('NORLAB_GENERATOR_MODEL', 'gpt-oss-120b')
         self.critic_model = os.getenv('NORLAB_CRITIC_MODEL', 'gpt-oss-120b')
         self.fast_model = os.getenv('NORLAB_FAST_MODEL', self.generator_model)
         configured_embedding_model = os.getenv('NORLAB_EMBEDDING_MODEL', '')
@@ -490,7 +490,7 @@ class ModelGateway:
         else:
             self.embedding_model = configured_embedding_model or 'yandex-embeddings'
             self.vision_model = configured_vision_model or 'qwen3.6-35b-a3b'
-        self.embedding_dimensions = int(os.getenv('NORLAB_EMBEDDING_DIMENSIONS', '768'))
+        self.embedding_dimensions = int(os.getenv('NORLAB_EMBEDDING_DIMENSIONS', '256'))
         self.mode = os.getenv('NORLAB_LLM_MODE', 'real')
 
     def model_uri(self, model: str) -> str:

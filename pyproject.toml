@@ -10,6 +10,7 @@ dependencies = [
   "httpx",
   "openpyxl",
   "pypdf",
+  "python-multipart",
   "sqlalchemy",
   "alembic",
   "psycopg[binary]",

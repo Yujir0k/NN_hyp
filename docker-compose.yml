@@ -1,9 +1,35 @@
 name: norlab
 
 services:
+  norlab-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      NORLAB_STORAGE_BACKEND: local
+      NORLAB_OBJECT_STORAGE: local
+      NORLAB_ENABLE_REDIS: "false"
+      NORLAB_ENABLE_NEO4J: "false"
+    volumes:
+      - norlab_state:/app/data/state
+      - norlab_storage:/app/data/storage
+    expose:
+      - "8000"
+    restart: unless-stopped
+
   norlab-frontend:
     build:
       context: ./frontend
+      dockerfile: Dockerfile
+    depends_on:
+      - norlab-backend
     ports:
       - "4173:80"
     restart: unless-stopped
+
+volumes:
+  norlab_state:
+  norlab_storage:
