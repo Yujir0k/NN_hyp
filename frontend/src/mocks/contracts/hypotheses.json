@@ -1,0 +1,42 @@
+{
+  "description": "Frontend contract for generated and ranked hypotheses before backend integration.",
+  "request": {
+    "projectId": "kgmk-tailings",
+    "rankingWeights": {
+      "novelty": 30,
+      "feasibility": 25,
+      "physicochemicalMechanism": 30,
+      "lowRisk": 15
+    },
+    "domainConstraints": "Only tailings, slags, equipment chains and metallurgical processing are allowed."
+  },
+  "response": {
+    "items": [
+      {
+        "id": "H-12",
+        "claim": "Поэтапное доизмельчение повысит извлечение Ni и Cu",
+        "family": "Гранулометрия",
+        "novelty": "Новая",
+        "uncertainty": "Средняя",
+        "disagreement": "Высокое",
+        "kpi": "+2,4 п.п.",
+        "weak": "Энергия",
+        "scores": {
+          "science": 5,
+          "engineering": 4,
+          "mechanism": 4,
+          "testability": 5
+        },
+        "evidence": [
+          {
+            "sourceId": "src-tailings-pdf",
+            "fileName": "Хвосты_КГМК_характеристика.pdf",
+            "page": 3,
+            "paragraph": 2,
+            "claim": "Доизмельчение повышает раскрытие тонковкраплённых сульфидов."
+          }
+        ]
+      }
+    ]
+  }
+}

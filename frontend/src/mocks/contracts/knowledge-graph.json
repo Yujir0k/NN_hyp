@@ -1,0 +1,22 @@
+{
+  "description": "Frontend contract for a traceable evidence graph: source → extracted fact → hypothesis → validation/risk.",
+  "response": {
+    "nodes": [
+      { "id": "pdf", "label": "Характеристика хвостов", "type": "source", "sourceId": "file-tailings-pdf", "confidence": 1 },
+      { "id": "scheme", "label": "Схема аппаратов НОФ", "type": "source", "sourceId": "file-nof-scheme", "confidence": 0.96 },
+      { "id": "mineralogy", "label": "Ni/Cu в тонких сростках", "type": "fact", "confidence": 0.91, "sourcePage": 3 },
+      { "id": "equipment", "label": "Доизмельчение доступно", "type": "fact", "confidence": 0.84, "sourceRegion": "regrinding-circuit" },
+      { "id": "h12", "label": "H-12 · Поэтапное доизмельчение", "type": "hypothesis", "score": 91 },
+      { "id": "experiment", "label": "EXP-12-01", "type": "experiment", "status": "ready" },
+      { "id": "risk", "label": "Риск переизмельчения", "type": "risk", "severity": "medium" }
+    ],
+    "edges": [
+      { "from": "pdf", "to": "mineralogy", "weight": 4, "relation": "extracted_from", "reason": "Факт извлечён со страницы 3" },
+      { "from": "scheme", "to": "equipment", "weight": 5, "relation": "recognised_from", "reason": "Контур распознан на схеме оборудования" },
+      { "from": "mineralogy", "to": "h12", "weight": 5, "relation": "supports", "reason": "Неполное раскрытие объясняет потенциальный эффект" },
+      { "from": "equipment", "to": "h12", "weight": 3, "relation": "makes_feasible", "reason": "Гипотеза реализуема на текущей цепи" },
+      { "from": "h12", "to": "experiment", "weight": 5, "relation": "validated_by", "reason": "Протокол проверяет прирост извлечения" },
+      { "from": "h12", "to": "risk", "weight": 3, "relation": "limited_by", "reason": "Нужно контролировать P80 и энергозатраты" }
+    ]
+  }
+}

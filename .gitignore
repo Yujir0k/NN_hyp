@@ -1,0 +1,11 @@
+.env
+.env.local
+__pycache__/
+.pytest_cache/
+*.pyc
+*.log
+*.egg-info/
+data/state/*
+!data/state/.gitkeep
+data/storage/*
+!data/storage/.gitkeep

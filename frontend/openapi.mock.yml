@@ -1,0 +1,64 @@
+openapi: 3.0.3
+info:
+  title: NORLAB Frontend Projections
+  version: 0.1.0
+paths:
+  /projects:
+    get:
+      operationId: listProjects
+      responses:
+        '200':
+          description: Project summaries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProjectSummary'
+  /projects/{projectId}/workspace-view:
+    get:
+      operationId: getWorkspaceView
+      parameters:
+        - in: path
+          name: projectId
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Aggregated workspace projection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkspaceView'
+components:
+  schemas:
+    ProjectionMeta:
+      type: object
+      required: [id, version, updated_at, capabilities, warnings, partial]
+      properties:
+        id: { type: string }
+        version: { type: integer }
+        updated_at: { type: string, format: date-time }
+        capabilities: { type: array, items: { type: string } }
+        warnings: { type: array, items: { type: string } }
+        partial: { type: boolean }
+    ProjectSummary:
+      allOf:
+        - $ref: '#/components/schemas/ProjectionMeta'
+        - type: object
+          required: [name, readiness, finalists, open_experiments]
+          properties:
+            name: { type: string }
+            readiness: { type: integer }
+            finalists: { type: integer }
+            open_experiments: { type: integer }
+    WorkspaceView:
+      allOf:
+        - $ref: '#/components/schemas/ProjectionMeta'
+        - type: object
+          required: [project_name, readiness, indexed_files, memory_matches]
+          properties:
+            project_name: { type: string }
+            readiness: { type: integer }
+            indexed_files: { type: integer }
+            memory_matches: { type: integer }

@@ -1,0 +1,32 @@
+[project]
+name = "norlab-backend"
+version = "0.1.0"
+description = "NORLAB hackathon backend MVP for hypothesis factory workflows."
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi",
+  "uvicorn",
+  "pydantic",
+  "httpx",
+  "openpyxl",
+  "pypdf",
+  "sqlalchemy",
+  "alembic",
+  "psycopg[binary]",
+  "neo4j",
+  "redis",
+  "celery",
+  "boto3",
+]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+exclude = ["data*", "docs*", "frontend*", "infra*", "scripts*", "tests*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

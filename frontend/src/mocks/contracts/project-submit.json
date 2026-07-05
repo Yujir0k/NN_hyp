@@ -1,0 +1,26 @@
+{
+  "description": "Frontend contract for create-project FormData submission.",
+  "endpointDraft": "POST /api/projects",
+  "contentType": "multipart/form-data",
+  "fields": {
+    "task": "Повысить извлечение ценных компонентов из хвостов флотации",
+    "result": "Проверяемый технологический протокол",
+    "area": "met",
+    "success": "Прирост извлечения не менее 2 п.п.",
+    "constraints": "Ограничения задаются обычным текстом, не пунктами и не prompt-блоком.",
+    "files": [
+      {
+        "name": "Хвосты_КГМК_характеристика.pdf",
+        "kind": "pdf"
+      },
+      {
+        "name": "Минералогия_хвостов.xlsx",
+        "kind": "spreadsheet"
+      },
+      {
+        "name": "Схема_цепи_аппаратов.png",
+        "kind": "image"
+      }
+    ]
+  }
+}

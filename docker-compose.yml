@@ -1,0 +1,9 @@
+name: norlab
+
+services:
+  norlab-frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "4173:80"
+    restart: unless-stopped
