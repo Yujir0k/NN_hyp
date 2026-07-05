@@ -1,5 +1,5 @@
 param(
-  [string]$HostName = "77.221.151.211",
+  [string]$HostName = "45.129.126.44",
   [string]$User = "root",
   [string]$KeyPath = "$env:USERPROFILE\.ssh\norlab_vds_ed25519",
   [int]$LocalBackendPort = 8000,

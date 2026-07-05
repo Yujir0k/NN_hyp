@@ -1,6 +1,6 @@
 # NORLAB VDS tunnel deploy
 
-Public entry point: `http://77.221.151.211`
+Public entry point: `http://45.129.126.44`
 
 Architecture:
 
@@ -36,7 +36,7 @@ python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
 3. Open:
 
 ```text
-http://77.221.151.211
+http://45.129.126.44
 ```
 
 ## Current SSH blocker observed on 2026-07-05
