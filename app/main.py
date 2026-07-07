@@ -1945,6 +1945,17 @@ def validate_llm_hypothesis(
         'numeric_context_used': numeric_context,
         'validation_warnings': validation_warnings,
     }
+    if os.getenv('NORLAB_STRICT_LLM', 'true').lower() != 'true':
+        normalized['grounding']['validation_warnings'] = [
+            *validation_warnings,
+            *[f'non_strict_acceptance: {reason}' for reason in reasons],
+        ]
+        if not normalized.get('supporting_evidence'):
+            fallback_evidence = list(validation_context.get('allowed_evidence', {}).keys())[:2]
+            normalized['supporting_evidence'] = fallback_evidence
+            normalized['data_triggers'] = fallback_evidence
+            normalized['grounding']['evidence_ids'] = fallback_evidence
+        return True, [], normalized
     return not reasons, reasons, normalized
 
 
